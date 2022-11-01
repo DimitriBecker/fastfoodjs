@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <style>
+    
+        html * {
+            font-family: 'Indie Flower', cursive;
+            font-family: 'Roboto', sans-serif;
+        }
+
+
+    </style>
+    
+    <title>Döner Inc.</title>
+    <script>
+        let geld = 250;
+        let level = 1;
+        let mitarbeiter = 0;
+
+        let verkaufspreis = 3.50;
+
+        let doener = 3;
+        let fleisch = 25;
+        let salat = 25;
+        let brot = 25;
+
+        let ticks = 1;
+
+        function update() {
+            document.getElementById('geld').innerHTML = geld;
+            document.getElementById('level').innerHTML = level;
+            document.getElementById('mitarbeiter').innerHTML = mitarbeiter;
+            document.getElementById('verkaufspreis').innerHTML = verkaufspreis;
+            document.getElementById('doener').innerHTML = doener;
+            document.getElementById('fleisch').innerHTML = fleisch;
+            document.getElementById('salat').innerHTML = salat;
+            document.getElementById('brot').innerHTML = brot;
+            document.getElementById('ticks').innerHTML = ticks;
+        }
+
+        function tick() {
+            ticks++;
+            //geld = geld.toFixed(2) - 0.01;
+            geld = (geld - 0.01).toFixed(2);
+            //geld.toFixed(2);         
+            //geld.parseFloat().toFixed(2)
+        }
+
+        function verkaufen() {
+            let umsatz = 0;
+            umsatz = doener * verkaufspreis;
+            doener = 0;
+            geld = geld + umsatz;
+        }
+
+        function doenerBauen() {
+            doener++;
+            fleisch--;
+            salat--;
+            brot--;
+        }
+
+        function fleischKaufen(){
+            fleisch = fleisch + 10;
+            geld = geld - 7.5;
+        }
+
+        function salatKaufen(){
+            salat = salat + 10;
+            geld = geld - 5;
+        }
+
+        function brotKaufen(){
+            brot = brot + 10;
+            geld = geld - 10;
+        }
+
+        function gelbBekommen(){
+            geld = geld + 500;   
+        }
+        
+        function emitarbeiter(status){
+            if(status === 'hire'){
+                mitarbeiter++;
+            }else{
+                mitarbeiter--;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>Geld</td>
+            <td id="geld">0</td>
+        </tr>
+        <tr>
+            <td>Level</td>
+            <td id="level">0</td>
+        </tr>
+        <tr>
+            <td>Mitarbeiter</td>
+            <td id="mitarbeiter">0</td>
+        </tr>
+        <tr>
+            <td>Verkaufspreis</td>
+            <td id="verkaufspreis">0</td>
+        </tr>
+        <tr>
+            <td>Döner</td>
+            <td id="doener">0</td>
+        </tr>
+        <tr>
+            <td>Fleisch</td>
+            <td id="fleisch">0</td>
+        </tr>
+        <tr>
+            <td>Salat</td>
+            <td id="salat">0</td>
+        </tr>
+        <tr>
+            <td>Brot</td>
+            <td id="brot">0</td>
+        </tr>
+        <tr>
+            <td>Ticks</td>
+            <td id="ticks">0</td>
+        </tr>
+    </table>
+    <br><br>
+    <button onclick="verkaufen()">alle Döner verkaufen</button><br><br>
+    <button onclick="doenerBauen()">1x Döner bauen</button><br><br>
+    <button onclick="fleischKaufen()">10x Fleisch für 7,50 EUR kaufen</button><br><br>
+    <button onclick="salatKaufen()">10x Salat für 5,00 EUR kaufen</button><br><br>
+    <button onclick="brotKaufen()">10x Brot für 10 EUR kaufen</button><br><br>
+    <button onclick="geldBekommen()">500 EUR auf der Straße finden</button><br><br>
+    <button onclick="emitarbeiter('hire')">1x Mitarbeiter einstellen</button><br><br>
+    <button onclick="emitarbeiter('fire')">1x Mitarbeiter feuern</button><br><br>
+
+    <script>
+        setInterval(update, 1000) // grafik update
+        setInterval(tick, 1000) // kalkulation laufender Kosten
+    </script>
+</body>
+</html>
